@@ -85,7 +85,7 @@ def server_user():
         new_account_pass = raw_input("Password: ")
 
         open_account = Accounts()
-        open_account.new_account(new_account_name, new_account_pass)
+        open_account.new_account(str(new_account_name), str(new_account_pass))
 
     else:
         pass
