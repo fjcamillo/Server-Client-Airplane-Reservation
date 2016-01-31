@@ -1,103 +1,90 @@
-import threading
+import os
 import socket
 import time
-import os
-
-__author__ = 'Francisc'
 
 
-class AirplaneTypes:
+class ServerApplications:
 
     def __init__(self):
-        pass
+        self.menu_holder = ''
 
-    def boeing(self):
-        pass
-
-    def airbus(self):
-        pass
-
-    def new_airplane_brand(self):
-        pass
-
-# --------------------Account Class--------------------
-
-
-class Accounts:
-
-    def __init__(self):
-        self.account_database = {}
-
-    def old_account(self, account_username, account_password):
-
-        if str(account_username) in self.account_database:
-
-            for_checking = self.account_database[str(account_username)]
-            if str(account_password) == str(for_checking):
-                print "Account Verified."
-                input()
-        else:
-            print "Account is not in our Database"
-            countdown()
-            server_user()
-
-    def new_account(self, new_account_username, new_account_password):
-        self.account_database[str(new_account_username)] = str(new_account_password)
-        print "Account Added to Database"
-
-
-class Pages():
-    def __init__(self):
-        pass
-
-    def first_page(self):
-        print "Welcome to the Flight Reservation Module"
-        print "Representative's Name: ", str(Accounts)
-
-
-def countdown():
-    for i in range(5, 0, 1):
-        print str(i)
-        time.sleep(1)
-
-
-def server_user():
-    print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-
-    print "                                                           " \
-          "<<< Welcome to the Airplane Reservation Server >>>"
-    status = raw_input("                                                           "
-                       "Do you have an account? [Y/N]: ")
-
-    if status.lower() == 'y':
+    def manage_account(self):
         os.system('cls')
-        print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-        username = raw_input("                                    "
-                             "             Representative's Name: ")
-        user_password = raw_input("                                    "
-                                  "             Representative's Password: ")
-        open_account = Accounts()
-        open_account.old_account(username, user_password)
+        print("Welcome to Account Manager")
+        print("=================================")
+        print()
 
-    elif status.lower() == 'n':
-        os.system('cls')
-        new_account_name = raw_input("Name: ")
-        new_account_pass = raw_input("Password: ")
 
-        open_account = Accounts()
-        open_account.new_account(str(new_account_name), str(new_account_pass))
+    def view_flight_status(self):
+        pass
 
+    def create_flight(self):
+        pass
+
+    def confirm_flight(self):
+        pass
+
+    def restart_class(self):
+        pass
+
+
+def landing_page():
+    print("<<<Welcome to the Airplane Server Side App>>>\n")
+    print("Name: " + """
+A. Manage Account
+B. View Flight Status
+C. Create a Flight for Booking
+D. Confirm a Flight Booking Request
+E. Exit
+        """)
+    task_to_do = input("\nChoose the task to do: ")
+    live_account = ServerApplications()
+    if task_to_do.lower() == 'a':
+        live_account.manage_account()
+    elif task_to_do.lower() == 'b':
+        live_account.view_flight_status()
+    elif task_to_do.lower() == 'c':
+        live_account.create_flight()
+    elif task_to_do.lower() == 'd':
+        live_account.confirm_flight()
+    elif task_to_do.lower() == 'e':
+        exit()
     else:
-        pass
+        print("You typed something wrong. Please choose again!")
+        input("<<<Press Enter>>>")
+        os.system('cls')
+        landing_page()
+
+def start_server():
+    print("Program will now connect to localhost")
+    time.sleep(2)
+    host = '127.0.0.1'
+    port = 5000
+
+    s = socket.socket()
+    s.bind((host, port))
+    #s.listen(1             # '#' line will only be added if needed
+    #c, address = s.accept()
 
 
-
-
+def loading_bar():
+    os.system('cls')
+    print("-Loading-")
+    for i in range(0, 11, 1):
+        if i == 0:
+            print("[", end='')
+            time.sleep(2)
+        elif i == 10:
+            print("]")
+            time.sleep(2)
+        else:
+            print("#", end='')
+            time.sleep(1)
 def main():
     os.system('cls')
-    server_user()
+    loading_bar()
+    start_server()
+    landing_page()
 
 if __name__ == '__main__':
     main()
-
-
